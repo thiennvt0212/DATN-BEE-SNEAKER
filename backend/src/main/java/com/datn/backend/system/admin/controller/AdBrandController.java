@@ -45,6 +45,7 @@ public class AdBrandController {
     @GetMapping("/detail/{id}")
     public ResponseEntity<?> detail(@PathVariable String id){
         Brand brand = adBrandService.findById(id);
+        System.out.println("thien");
         return ResponseEntity.ok(brand);
     }
 
