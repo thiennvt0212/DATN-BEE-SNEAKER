@@ -23,6 +23,7 @@ public class AdBrandController {
         List<Brand> list = adBrandService.getAll();
         System.out.println(list);
         return ResponseEntity.ok(adBrandService.getAll());
+//        thiên
     }
 
     @PostMapping("/add")
