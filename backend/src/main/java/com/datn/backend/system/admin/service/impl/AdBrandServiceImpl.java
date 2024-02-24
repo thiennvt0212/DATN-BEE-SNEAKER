@@ -7,6 +7,7 @@ import com.datn.backend.system.admin.service.AdBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +18,13 @@ public class AdBrandServiceImpl implements AdBrandService {
     private AdBrandRepository adBrandRepository;
 
 
+    public  Long changeDateTime(LocalDateTime localDateTime){
+        localDateTime = LocalDateTime.now();
+        long longValue = localDateTime.toEpochSecond(java.time.ZoneOffset.ofHours(0));
+        return longValue;
+    }
+
+
     @Override
     public List<Brand> getAll() {
         return adBrandRepository.findAll();
@@ -25,10 +33,12 @@ public class AdBrandServiceImpl implements AdBrandService {
     @Override
     public Brand add(AdBrandRequest brandRequest) {
         Brand brand = new Brand();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        long dateTime = changeDateTime(localDateTime);
+        brand.setCreatedDate(dateTime);
         brand.setCode(brandRequest.getCode());
         brand.setName(brandRequest.getName());
         return adBrandRepository.save(brand);
-
     }
 
     @Override
