@@ -1,26 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { Header } from "./layout/Header";
+import { Sidebar } from "./layout/Sidebar";
+import Brand from "./page/admin/Brand/Brand";
+import Sole from "./page/admin/Sole/Sole";
+import Color from "./page/admin/Color/Color";
+import Material from "./page/admin/Material/Material";
+import Size from "./page/admin/Size/Size";
+import Product from "./page/admin/Product/Product";
+import ShoesColar from "./page/admin/Shoes colar/ShoesColar";
 
 function App() {
-
-
-  //sdgdg
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header></Header>
+        <Sidebar></Sidebar>
+        <div className="app-mid">
+          <div className="form-in" style={{ backgroundColor: "transparent" }}>
+            <Routes>
+              <Route path="/brand" element={<Brand />} />
+              <Route path="/sole" element={<Sole />} />
+              <Route path="/color" element={<Color />} />
+              <Route path="/material" element={<Material />} />
+              <Route path="/size" element={<Size />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/shoesColar" element={<ShoesColar />} />
+            </Routes>
+          </div>
+        </div>
+      </Router>
     </div>
   );
 }

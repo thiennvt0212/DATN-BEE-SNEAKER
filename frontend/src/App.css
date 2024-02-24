@@ -1,6 +1,14 @@
 .App {
   text-align: center;
 }
+.app-mid{
+  height: calc(100vh) !important;
+  background-color: rgb(241, 241, 241);
+  margin-left: 260px;
+  margin-top: 80px;
+  padding: 25px;
+  
+}
 
 .App-logo {
   height: 40vmin;
