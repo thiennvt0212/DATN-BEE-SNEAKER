@@ -2,29 +2,20 @@ import { useEffect, useState } from "react";
 import { AdBrandAPI } from "../../../api/admin/AdBrandApi";
 import { Button, Input, Modal, message } from "antd";
 
-const ModalDetail = ({ visible, onCancel, fetchAll, id }) => {
-  let [codeBrand, setCodeBrand] = useState("");
+const ModalAdd = ({visible, onCancel, fetchAll}) =>{
+    let [codeBrand, setCodeBrand] = useState("");
   let [nameBrand, setNameBrand] = useState("");
-  let [idSelected, setIdSelected] = useState(id);
   let [errorCode, setErrorCode] = useState("");
   let [errorName, setErrorName] = useState("");
 
   useEffect(() => {
-    if (id != null) {
-      handelDetail();
-    }
+    setCodeBrand("");
+    setNameBrand("");
+    setErrorCode("");
+    setErrorName("");
   }, [visible]);
 
-  const handelDetail = () => {
-    AdBrandAPI.handelDetail(id).then((res) => {
-      console.log(res.data);
-      setCodeBrand(res.data.code);
-      setNameBrand(res.data.name);
-      //   console.log(id);
-    });
-  };
-
-  const handelUpdate = () => {
+  const handelAdd = () => {
     let check = 0;
     if (codeBrand === "") {
       setErrorCode("* Vui lòng nhập mã hợp lệ");
@@ -43,17 +34,16 @@ const ModalDetail = ({ visible, onCancel, fetchAll, id }) => {
         code: codeBrand,
         name: nameBrand,
       };
-      AdBrandAPI.handelUpdate(id, obj).then((res) => {
-        message.success("Thay đổi thành công!");
+      AdBrandAPI.handelAdd(obj).then((res) => {
+        message.success("Thêm mới thành công!");
         onCancel();
         fetchAll();
       });
     }
   };
-
-  return (
-    <Modal
-      title="Brand detail"
+    return (
+<Modal
+      title="Brand add"
       open={visible}
       onCancel={onCancel}
       footer={null}
@@ -66,8 +56,7 @@ const ModalDetail = ({ visible, onCancel, fetchAll, id }) => {
           value={codeBrand}
           onChange={(e) => setCodeBrand(e.target.value)}
         />
-        <span style={{ color: "red" }}>{errorCode}</span>
-        <br></br>
+        <span style={{ color: "red" }}>{errorCode}</span><br></br>
         <span>Tên loại: </span>
         <Input
           style={{ marginTop: "10px" }}
@@ -76,20 +65,15 @@ const ModalDetail = ({ visible, onCancel, fetchAll, id }) => {
         />
         <span style={{ color: "red" }}>{errorName}</span>
         <Button
+          style={{ marginTop: "10px", marginLeft: "270px", width: "200px" }}
+          onClick={handelAdd}
           type="primary"
-          style={{
-            background: "rgb(255, 215, 0)",
-            marginTop: "10px",
-            marginLeft: "270px",
-            width: "200px",
-            borderColor: "rgb(255, 215, 0)",
-          }}
-          onClick={() => handelUpdate(id)}
+          htmlType="submit"
         >
-          Sửa
+          Add
         </Button>
       </div>
     </Modal>
-  );
-};
-export default ModalDetail;
+    );
+}
+export default ModalAdd;
