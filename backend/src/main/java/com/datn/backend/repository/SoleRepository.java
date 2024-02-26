@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 @Repository(SoleRepository.NAME)
-public interface SoleRepository extends JpaRepository<Sole, UUID> {
+public interface SoleRepository extends JpaRepository<Sole, String> {
     String NAME = "BaseSoleRepository";
 }
