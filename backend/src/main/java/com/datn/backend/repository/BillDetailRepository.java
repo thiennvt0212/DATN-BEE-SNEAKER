@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 @Repository(BillDetailRepository.NAME)
-public interface BillDetailRepository extends JpaRepository<BillDetail, UUID> {
+public interface BillDetailRepository extends JpaRepository<BillDetail, String> {
     String NAME = "BaseBillDetailRepository";
 }
