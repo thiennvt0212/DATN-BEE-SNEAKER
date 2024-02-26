@@ -1,16 +1,18 @@
 import {
   faArrowUp,
   faCalendarDay,
+  faEye,
   faFilter,
   faPen,
   faPlusMinus,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Input, Space, Table } from "antd";
+import { Button, Input, Radio, Space, Table, message } from "antd";
 import { useEffect, useState } from "react";
 import { AdBrandAPI } from "../../../api/admin/AdBrandApi";
-import ModalDetail from "./ModalDetail"
+import ModalDetail from "./ModalDetail";
+import ModalAdd from "./ModalAdd";
 
 function Brand() {
   let [listBrand, setListBrand] = useState([]);
@@ -24,6 +26,18 @@ function Brand() {
       .then((response) => {
         setListBrand(response.data);
         console.log(listBrand);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleDelete = (id) => {
+    AdBrandAPI.handelDelete(id)
+      .then((res) => {
+        const newState = listBrand.filter((item) => item.id !== id);
+        setListBrand(newState);
+        message.success("Xoá thành công!");
       })
       .catch((error) => {
         console.error(error);
@@ -56,23 +70,23 @@ function Brand() {
       render: (text, record, index) => <span>{index + 1}</span>,
     },
     {
-      title: "Code brand",
+      title: "Mã thương hiệu",
       dataIndex: "code",
       key: "code",
     },
     {
-      title: "Name brand",
+      title: "Tên thương hiệu",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Action",
+      title: "Chức năng",
       dataIndex: "action",
       key: "action",
       render: (text, record) => (
         <Space>
           <FontAwesomeIcon
-            icon={faCalendarDay}
+            icon={faEye}
             onClick={() => {
               openModalDetail(record.id);
             }}
@@ -81,7 +95,7 @@ function Brand() {
 
           <FontAwesomeIcon
             icon={faTrashCan}
-            // onClick={() => handleDelete(record.id)}
+            onClick={() => handleDelete(record.id)}
             style={{ padding: 15, fontSize: "20px", color: "red" }}
           ></FontAwesomeIcon>
 
@@ -98,6 +112,7 @@ function Brand() {
   ];
 
   const [visibleModalDetail, setVisibleModalDetail] = useState(false);
+  const [visibleModalAdd, setVisibleModalAdd] = useState(false);
   const [idSelected, setIdSelected] = useState(null);
 
   const openModalDetail = (id) => {
@@ -107,6 +122,13 @@ function Brand() {
   const cancelModalDetail = () => {
     setIdSelected(null);
     setVisibleModalDetail(false);
+  };
+
+  const openModalAdd = () => {
+    setVisibleModalAdd(true);
+  };
+  const cancelModalAdd = () => {
+    setVisibleModalAdd(false);
   };
   return (
     <div className="form-brand" style={{ backgroundColor: "transparent" }}>
@@ -122,26 +144,38 @@ function Brand() {
           <div
             style={{ fontSize: "30px", fontWeight: "bold", marginRight: 1100 }}
           >
-            Brand
+            Thương hiệu
           </div>
         </div>
         <div style={{ marginTop: 30 }}>
-          <Input
-            style={{ width: "250px", marginLeft: "50px", marginRight: "20px" }}
+          <Input className="input-search"
+            style={{
+              width: "350px",
+              height: "35px",
+              right: 330,
+              marginRight: "20px",
+            }}
+            placeholder="Nhập tên sản phẩm cần tìm..."
             // value={findBrand}
             // onChange={(e) => setFindBrand(e.target.value)}
           />
-          <FontAwesomeIcon
+          {/* <FontAwesomeIcon
             icon={faFilter}
             // onClick={loadData}
             style={{ height: "25px", marginLeft: "10px" }}
-          />
+          /> */}
 
-          <FontAwesomeIcon
-            icon={faPlusMinus}
-            style={{ height: "25px", marginLeft: "20px" }}
-            // onClick={openModalAdd}
-          ></FontAwesomeIcon>
+          <Button style={{ left: 300 }} onClick={openModalAdd}>
+            <FontAwesomeIcon icon={faPlusMinus}></FontAwesomeIcon>
+            <span
+              style={{
+                color: "#C0C0C0",
+                marginLeft: "20px",
+              }}
+            >
+              Thêm mới
+            </span>
+          </Button>
         </div>
       </div>
       <div
@@ -164,6 +198,13 @@ function Brand() {
         visible={visibleModalDetail}
         onCancel={cancelModalDetail}
         id={idSelected}
+        fetchAll={loadData}
+      />
+
+      <ModalAdd
+        visible={visibleModalAdd}
+        onCancel={cancelModalAdd}
+        fetchAll={loadData}
       />
     </div>
   );

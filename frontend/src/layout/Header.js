@@ -4,8 +4,7 @@ import { message, Upload } from "antd";
 import "./Header.css";
 export function Header() {
   return (
-    <div className="header">
-      <span>aaaaa</span>
+    <div className="header" style={{boxShadow: "3px 3px 3px #CCCCCC"}}>
       
     </div>
   );
