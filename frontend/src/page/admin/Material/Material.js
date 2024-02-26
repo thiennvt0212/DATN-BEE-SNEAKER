@@ -1,8 +1,48 @@
 import { faFilter, faPlusMinus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Input } from "antd";
+import { Input,Table } from "antd";
+import { useEffect, useState } from "react";
+import { AdMaterialAPI } from "../../../api/admin/AdMaterialApi";
 
 function Material(){
+    let [listMaterial ,setListMaterial] = useState([]);
+
+    const loadDataTable = () => {
+      AdMaterialAPI.getAll().then((response) => {
+        setListMaterial(response.data);
+        console.log(listMaterial);
+      }).catch((err) => {
+        console.error(err);
+      });
+    };
+
+    useEffect(() =>{
+      loadDataTable();
+    },[])
+
+      const columns = [
+        {
+          title: (
+            <span>
+              <div style={{ display: "flex" }}>
+                <span>STT</span>
+              </div>
+            </span>
+          ),
+          dataIndex: "stt",
+          render: (text, record, index) => <span>{index + 1}</span>,
+         },
+         {
+          title: "Code Color",
+          dataIndex: "code",
+          key: "code",
+        },
+        {
+          title: "Name Color",
+          dataIndex: "name",
+          key: "name",
+        },]
+    
     return(
         <div className="form-material" style={{ backgroundColor: "transparent" }}>
         <div className="form-search">
@@ -47,7 +87,13 @@ function Material(){
             borderRadius: "5px",
           }}
         >
-          
+             <Table
+          className="tableBrand"
+          dataSource={listMaterial}
+          rowKey="id"
+          columns={columns}
+          pagination={false}
+        />
         </div>
       </div>
     );

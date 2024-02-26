@@ -5,7 +5,7 @@ import jakarta.persistence.PrePersist;
 
 import java.util.UUID;
 
-public class CreatePrimaryEntityListener {
+public class  CreatePrimaryEntityListener {
 
     @PrePersist
     private void onCreate(PrimaryEntity entity) {
