@@ -18,4 +18,25 @@ export class AdColorAPI{
 
         })
     }
+    static handelDelete(id){
+        return request({
+          method: "Delete",
+          url: apiColor + "/delete/" + id,
+        });
+      }
+
+    //   static getDetail(id) {
+    //     return request({
+    //         method: "GET",
+    //         url: apiColor + "/getDetail/" + id,
+    //     });
+    // }
+
+    static update(id, data) {
+        return request({
+            method: "PUT",
+            url: apiColor + "/update/" + id,
+            data: data,
+        });
+    }
 }

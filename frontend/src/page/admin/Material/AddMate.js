@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusMinus } from "@fortawesome/free-solid-svg-icons";
@@ -37,11 +36,7 @@ export function FormDialog({onSubmit}) {
             // value={findBrand}
             // onChange={(e) => setFindBrand(e.target.value)}
           />
-          {/* <FontAwesomeIcon
-            icon={faFilter}
-            // onClick={loadData}
-            style={{ height: "25px", marginLeft: "10px" }}
-          /> */}
+        
 
           <Button style={{ left: 300 }} onClick={handleClickOpen}>
             <FontAwesomeIcon icon={faPlusMinus}></FontAwesomeIcon>

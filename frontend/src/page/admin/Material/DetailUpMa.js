@@ -1,80 +1,69 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import {
+    faArrowUp,
+    faCalendarDay,
+    faEye,
+    faFilter,
+    faPen,
+    faPlusMinus,
+    faTrashCan,
+} from "@fortawesome/free-solid-svg-icons"; import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusMinus } from "@fortawesome/free-solid-svg-icons";
-import { Input, Table, message } from "antd";
+import { Button, Input, Radio, Space, Table, message } from "antd";
+import { useEffect, useState, useRef } from "react";
 
 
-export function FormDialog({onSubmit}) {
+export function FormDuDialog({ data, onSubmit }) {
     const [open, setOpen] = React.useState(false);
+    const codeInput = useRef();
+    const nameInput = useRef();
+    const [codeState, setCodeInput] = useState(null);
+    const [nameState, setNameInput] = useState(null);
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
+        setCodeInput(data.code);
+        codeInput.current = codeState;
+        setNameInput(data.name);
+        nameInput.current = nameState;
     };
 
     const handleClose = () => {
         setOpen(false);
     };
 
+    const submitClick = () => {
+        const code = codeState;
+        const name = nameState;
+        onSubmit(data.id, code, name);
+        handleClose();
+    }
+
     return (
         <React.Fragment>
-           
- <div style={{ marginTop: 30 }}>
-          <Input className="input-search"
-            style={{
-              width: "350px",
-              height: "35px",
-              right: 330,
-              marginRight: "20px",
-            }}
-            placeholder="Nhập tên sản phẩm cần tìm..."
-            // value={findBrand}
-            // onChange={(e) => setFindBrand(e.target.value)}
-          />
-          {/* <FontAwesomeIcon
-            icon={faFilter}
-            // onClick={loadData}
-            style={{ height: "25px", marginLeft: "10px" }}
-          /> */}
-
-          <Button style={{ left: 300 }} onClick={handleClickOpen}>
-            <FontAwesomeIcon icon={faPlusMinus}></FontAwesomeIcon>
-            <span
-              style={{
-                color: "#C0C0C0",
-                marginLeft: "20px",
-              }}
-            >
-              Thêm mới
-            </span>
-          </Button>
-        </div>
-
+            <FontAwesomeIcon
+                icon={faEye}
+                onClick={handleClickOpen}
+                style={{ marginRight: 15, fontSize: "20px" }}
+            ></FontAwesomeIcon>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 PaperProps={{
                     component: 'form',
-                    onSubmit: (event) => {
-                        event.preventDefault();
-                        const formData = new FormData(event.currentTarget);
-                        const formJson = Object.fromEntries((formData).entries());
-                        const code = formJson.code;
-                        const name = formJson.name;
-                        onSubmit(code, name);
-                        handleClose();
-                    },
+
                 }}
             >
                 <DialogTitle>Mời Nhập</DialogTitle>
                 <DialogContent>
-                
+
                     <TextField
                         autoFocus
                         required
@@ -82,6 +71,8 @@ export function FormDialog({onSubmit}) {
                         id="code"
                         name="code"
                         label="Code"
+                        value={codeState}
+                        onChange={(event) => setCodeInput(event.target.value)}
                         fullWidth
                         variant="standard"
                     />
@@ -92,13 +83,15 @@ export function FormDialog({onSubmit}) {
                         id="name"
                         name="name"
                         label="Name"
+                        value={nameState}
+                        onChange={(event) => setNameInput(event.target.value)}
                         fullWidth
                         variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Add</Button>
+                    <Button type="submit" onClick={submitClick}>Update</Button>
                 </DialogActions>
             </Dialog>
         </React.Fragment>
