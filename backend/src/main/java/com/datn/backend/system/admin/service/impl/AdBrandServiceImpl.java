@@ -1,10 +1,15 @@
 package com.datn.backend.system.admin.service.impl;
 
+import com.datn.backend.common.PageableObject;
 import com.datn.backend.entity.Brand;
 import com.datn.backend.system.admin.model.request.AdBrandRequest;
+import com.datn.backend.system.admin.model.request.FindBrandRequest;
+import com.datn.backend.system.admin.model.respone.BrandRespone;
 import com.datn.backend.system.admin.repository.AdBrandRepository;
 import com.datn.backend.system.admin.service.AdBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -61,6 +66,12 @@ public class AdBrandServiceImpl implements AdBrandService {
     public Brand findById(String id) {
         Brand brand = adBrandRepository.findById(id).get();
         return brand;
+    }
+
+    @Override
+    public PageableObject<BrandRespone> getAllPage(FindBrandRequest request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        return new PageableObject<>(adBrandRepository.getAllPage(pageable, request));
     }
 
 }

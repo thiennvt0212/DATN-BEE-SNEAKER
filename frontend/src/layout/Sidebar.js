@@ -12,7 +12,17 @@ import Material from "../page/admin/Material/Material";
 import Sole from "../page/admin/Sole/Sole";
 import ShoesColar from "../page/admin/Shoes colar/ShoesColar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoePrints } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBorderTopLeft,
+  faChartSimple,
+  faCircle,
+  faCircleDollarToSlot,
+  faFileLines,
+  faFilterCircleDollar,
+  faPlane,
+  faShoePrints,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -23,9 +33,45 @@ function getItem(label, key, icon, children, type) {
 }
 const items = [
   getItem(
+    "",
+    "aa",
+    null,
+    [
+      getItem(
+        <Link to="/shoesColar" element={<ShoesColar />}>
+          {" "}
+          <h4 style={{ color: "#C0C0C0", marginRight: "40px" }}>
+            {" "}
+            <FontAwesomeIcon
+              icon={faCircleDollarToSlot}
+              style={{ marginRight: "5px" }}
+            />
+            Bán hàng tại quầy
+          </h4>
+        </Link>
+      ),
+      getItem(
+        <Link to="/shoesColar" element={<ShoesColar />}>
+          {" "}
+          <h4 style={{ color: "#C0C0C0", marginRight: "40px" }}>
+            <FontAwesomeIcon
+              icon={faChartSimple}
+              style={{ marginRight: "5px" }}
+            />
+            Thống kê
+          </h4>
+        </Link>
+      ),
+    ],
+    "group"
+  ),
+  getItem(
     <>
       {/* <FontAwesomeIcon icon={faShoePrints} /> */}
-      <h4 style={{ color: "#C0C0C0", marginRight: "40px" }}>Quản lý sản phẩm</h4>
+      <h4 style={{ color: "#C0C0C0", marginRight: "40px" }}>
+        <FontAwesomeIcon icon={faShoePrints} style={{ marginRight: "5px" }} />
+        Quản lý sản phẩm
+      </h4>
     </>,
     "sub1",
     <MailOutlined />,
@@ -73,6 +119,36 @@ const items = [
         </Link>
       ),
     ]
+  ),
+  getItem(
+    "",
+    "",
+    null,
+    [
+      getItem(
+        <Link to="/shoesColar" element={<ShoesColar />}>
+          {" "}
+          <h4 style={{ color: "#C0C0C0", marginRight: "40px" }}>
+            {" "}
+            <FontAwesomeIcon icon={faUsers} style={{ marginRight: "5px" }} />
+            Tài khoản
+          </h4>
+        </Link>
+      ),
+      getItem(
+        <Link to="/shoesColar" element={<ShoesColar />}>
+          {" "}
+          <h4 style={{ color: "#C0C0C0", marginRight: "40px" }}>
+            <FontAwesomeIcon
+              icon={faFileLines}
+              style={{ marginRight: "5px" }}
+            />
+            Quản lý đơn hàng
+          </h4>
+        </Link>
+      ),
+    ],
+    "group"
   ),
 ];
 export function Sidebar() {

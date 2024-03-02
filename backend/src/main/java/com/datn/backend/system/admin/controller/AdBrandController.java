@@ -2,6 +2,7 @@ package com.datn.backend.system.admin.controller;
 
 import com.datn.backend.entity.Brand;
 import com.datn.backend.system.admin.model.request.AdBrandRequest;
+import com.datn.backend.system.admin.model.request.FindBrandRequest;
 import com.datn.backend.system.admin.service.AdBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,11 @@ public class AdBrandController {
         System.out.println(list);
         return ResponseEntity.ok(adBrandService.getAll());
 //        thiên
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllPage(FindBrandRequest request) {
+        return ResponseEntity.ok(adBrandService.getAllPage(request));
     }
 
     @PostMapping("/add")
