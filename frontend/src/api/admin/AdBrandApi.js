@@ -8,6 +8,13 @@ export class AdBrandAPI {
     });
   }
 
+  static getpage(filter) {
+    return request({
+      method: "GET",
+      url: apiBrand + `?value=${filter.value}&page=${filter.page}`,
+    });
+  }
+
   static handelDetail(id) {
     return request({
       method: "Get",

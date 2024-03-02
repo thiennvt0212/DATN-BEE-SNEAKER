@@ -18,5 +18,11 @@
     width: 100px;
     background-color: green !important;
 }
+.ant-menu .ant-menu-item-group-title {
+    padding: 0px 0px !important;
+    font-size: 14px;
+    line-height: 1.5714285714285714;
+    transition: all 0.3s;
+}
 
 

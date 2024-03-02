@@ -3,12 +3,18 @@ import {
   faCalendarDay,
   faEye,
   faFilter,
+  faMagnifyingGlass,
+  faMagnifyingGlassArrowRight,
+  faMagnifyingGlassChart,
+  faMagnifyingGlassDollar,
+  faMagnifyingGlassLocation,
+  faMagnifyingGlassPlus,
   faPen,
   faPlusMinus,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Input, Radio, Space, Table, message } from "antd";
+import { Button, Input, Pagination, Radio, Space, Table, message } from "antd";
 import { useEffect, useState } from "react";
 import { AdBrandAPI } from "../../../api/admin/AdBrandApi";
 import ModalDetail from "./ModalDetail";
@@ -17,15 +23,23 @@ import ModalAdd from "./ModalAdd";
 function Brand() {
   let [listBrand, setListBrand] = useState([]);
   let [current, setCurrent] = useState(1);
+  let [totalPages, setTotalPages] = useState(0);
+  let [findBrand, setFindBrand] = useState("");
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [current]);
+
   const loadData = () => {
-    AdBrandAPI.getAll()
+    let filter = {
+      value: findBrand,
+      page: current - 1,
+    };
+    AdBrandAPI.getpage(filter)
       .then((response) => {
-        setListBrand(response.data);
-        console.log(listBrand);
+        setListBrand(response.data.data);
+        console.log(response.data.data);
+        setTotalPages(response.data.totalPages);
       })
       .catch((error) => {
         console.error(error);
@@ -98,14 +112,6 @@ function Brand() {
             onClick={() => handleDelete(record.id)}
             style={{ padding: 15, fontSize: "20px", color: "red" }}
           ></FontAwesomeIcon>
-
-          <FontAwesomeIcon
-            icon={faPen}
-            onClick={() => {
-              // openModalUpdate(record.id);
-            }}
-            style={{ padding: 15, fontSize: "20px" }}
-          ></FontAwesomeIcon>
         </Space>
       ),
     },
@@ -147,25 +153,26 @@ function Brand() {
             Thương hiệu
           </div>
         </div>
-        <div style={{ marginTop: 30 }}>
-          <Input className="input-search"
+        <div style={{ marginTop: 30, marginRight:"640px"}}>
+          <Input
+            className="input-search"
             style={{
               width: "350px",
               height: "35px",
-              right: 330,
+              // right: 330,
               marginRight: "20px",
             }}
             placeholder="Nhập tên sản phẩm cần tìm..."
-            // value={findBrand}
-            // onChange={(e) => setFindBrand(e.target.value)}
+            value={findBrand}
+            onChange={(e) => setFindBrand(e.target.value)}
           />
-          {/* <FontAwesomeIcon
-            icon={faFilter}
-            // onClick={loadData}
-            style={{ height: "25px", marginLeft: "10px" }}
-          /> */}
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            onClick={loadData}
+            style={{ height: "25px"}}
+          />
 
-          <Button style={{ left: 300 }} onClick={openModalAdd}>
+          <Button style={{ left: 620 }} onClick={openModalAdd}>
             <FontAwesomeIcon icon={faPlusMinus}></FontAwesomeIcon>
             <span
               style={{
@@ -192,6 +199,15 @@ function Brand() {
           rowKey="id"
           columns={columns}
           pagination={false}
+        />
+        <Pagination
+          style={{ marginLeft: "100px", marginTop: "50px" }}
+          simple
+          current={current}
+          onChange={(value) => {
+            setCurrent(value);
+          }}
+          total={totalPages * 10}
         />
       </div>
       <ModalDetail
