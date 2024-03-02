@@ -186,7 +186,7 @@ function Material() {
           dataSource={listMaterial}
           rowKey="id"
           columns={columns}
-          pagination={false}
+          pagination={true}
         />
       </div>
     </div>

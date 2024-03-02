@@ -246,7 +246,7 @@ function Color() {
           dataSource={listColor}
           rowKey="id"
           columns={columns}
-          pagination={false}
+          pagination={true}
         />
       </div>
     </div>
