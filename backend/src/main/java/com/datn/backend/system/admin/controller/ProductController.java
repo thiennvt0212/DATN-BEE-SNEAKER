@@ -1,6 +1,5 @@
 package com.datn.backend.system.admin.controller;
 
-import com.datn.backend.entity.Brand;
 import com.datn.backend.entity.Product;
 import com.datn.backend.system.admin.model.request.ProductRequest;
 import com.datn.backend.system.admin.service.ProductService;
