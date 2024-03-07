@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AdBrandRequest {
+public class AdProductRequest {
 
     private String code;
 
     private String name;
-
 }

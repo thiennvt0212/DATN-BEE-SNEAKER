@@ -1,6 +1,6 @@
 package com.datn.backend.system.admin.model.respone;
 
-public interface BrandRespone {
+public interface ProductRespone {
     String getId();
 
     String getCode();

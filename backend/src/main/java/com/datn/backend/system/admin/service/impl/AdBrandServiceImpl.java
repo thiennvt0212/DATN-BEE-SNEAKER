@@ -12,7 +12,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,12 +24,13 @@ public class AdBrandServiceImpl implements AdBrandService {
     @Autowired
     private AdBrandRepository adBrandRepository;
 
-
-    public  Long changeDateTime(LocalDateTime localDateTime){
-        localDateTime = LocalDateTime.now();
-        long longValue = localDateTime.toEpochSecond(java.time.ZoneOffset.ofHours(0));
-        return longValue;
-    }
+//
+//    public static String[] changeDateTime(LocalDateTime createdDate, LocalDateTime lastModifiedDate){
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        String formattedCreatedDate = sdf.format(createdDate);
+//        String formattedLastModifiedDate = sdf.format(lastModifiedDate);
+//        return new  String[] {formattedCreatedDate, formattedLastModifiedDate};
+//    }
 
 
     @Override
@@ -38,9 +41,6 @@ public class AdBrandServiceImpl implements AdBrandService {
     @Override
     public Brand add(AdBrandRequest brandRequest) {
         Brand brand = new Brand();
-        LocalDateTime localDateTime = LocalDateTime.now();
-        long dateTime = changeDateTime(localDateTime);
-        brand.setCreatedDate(dateTime);
         brand.setCode(brandRequest.getCode());
         brand.setName(brandRequest.getName());
         return adBrandRepository.save(brand);

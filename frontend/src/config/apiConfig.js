@@ -5,3 +5,4 @@ export const apiSize ="http://localhost:8080/size";
 export const apiProduct ="http://localhost:8080/product";
 export const apiShoesColar ="http://localhost:8080/shoesColar";
 export const apiSole ="http://localhost:8080/sole";
+export const apiProductDetail ="http://localhost:8080/productDetail";

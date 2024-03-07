@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 @EnableJpaRepositories(
         basePackages = "com.datn.backend.repository"
@@ -188,6 +190,73 @@ public class DBGenerator implements CommandLineRunner {
         sole3.setCode("Sl3");
         sole3.setName("boot");
         sole3.setId(soleRepository.save(sole1).getId());
+
+        ProductDetail productDetail1 = new ProductDetail();
+        productDetail1.setPrice(new BigDecimal("100"));
+        productDetail1.setQuantity(200);
+        productDetail1.setStatus(1);
+        productDetail1.setBrandId(brand1.getId());
+        productDetail1.setColorId(color2.getId());
+        productDetail1.setMaterialId(material1.getId());
+        productDetail1.setProductId(product1.getId());
+        productDetail1.setShoesColarId(shoesColar2.getId());
+        productDetail1.setSizeId(size3.getId());
+        productDetail1.setSoleId(sole2.getId());
+        productDetail1.setId(productDetailRepository.save(productDetail1).getId());
+
+
+        ProductDetail productDetail2 = new ProductDetail();
+        productDetail2.setPrice(new BigDecimal("300"));
+        productDetail2.setQuantity(100);
+        productDetail2.setStatus(1);
+        productDetail2.setBrandId(brand2.getId());
+        productDetail2.setColorId(color1.getId());
+        productDetail2.setMaterialId(material1.getId());
+        productDetail2.setProductId(product3.getId());
+        productDetail2.setShoesColarId(shoesColar3.getId());
+        productDetail2.setSizeId(size2.getId());
+        productDetail2.setSoleId(sole1.getId());
+        productDetail2.setId(productDetailRepository.save(productDetail2).getId());
+
+        ProductDetail productDetail3 = new ProductDetail();
+        productDetail3.setPrice(new BigDecimal("50"));
+        productDetail3.setQuantity(400);
+        productDetail3.setStatus(1);
+        productDetail3.setBrandId(brand3.getId());
+        productDetail3.setColorId(color3.getId());
+        productDetail3.setMaterialId(material3.getId());
+        productDetail3.setProductId(product2.getId());
+        productDetail3.setShoesColarId(shoesColar1.getId());
+        productDetail3.setSizeId(size1.getId());
+        productDetail3.setSoleId(sole3.getId());
+        productDetail3.setId(productDetailRepository.save(productDetail3).getId());
+
+        ProductDetail productDetail4 = new ProductDetail();
+        productDetail4.setPrice(new BigDecimal("90"));
+        productDetail4.setQuantity(300);
+        productDetail4.setStatus(1);
+        productDetail4.setBrandId(brand1.getId());
+        productDetail4.setColorId(color2.getId());
+        productDetail4.setMaterialId(material3.getId());
+        productDetail4.setProductId(product3.getId());
+        productDetail4.setShoesColarId(shoesColar1.getId());
+        productDetail4.setSizeId(size2.getId());
+        productDetail4.setSoleId(sole2.getId());
+        productDetail4.setId(productDetailRepository.save(productDetail4).getId());
+
+        ProductDetail productDetail5 = new ProductDetail();
+        productDetail5.setPrice(new BigDecimal("90"));
+        productDetail5.setQuantity(300);
+        productDetail5.setStatus(1);
+        productDetail5.setBrandId(brand1.getId());
+        productDetail5.setColorId(color3.getId());
+        productDetail5.setMaterialId(material2.getId());
+        productDetail5.setProductId(product1.getId());
+        productDetail5.setShoesColarId(shoesColar2.getId());
+        productDetail5.setSizeId(size2.getId());
+        productDetail5.setSoleId(sole3.getId());
+        productDetail5.setId(productDetailRepository.save(productDetail5).getId());
+
 
     }
 

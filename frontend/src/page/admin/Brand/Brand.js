@@ -162,7 +162,7 @@ function Brand() {
               // right: 330,
               marginRight: "20px",
             }}
-            placeholder="Nhập tên sản phẩm cần tìm..."
+            placeholder="Nhập tên thương hiệu cần tìm..."
             value={findBrand}
             onChange={(e) => setFindBrand(e.target.value)}
           />

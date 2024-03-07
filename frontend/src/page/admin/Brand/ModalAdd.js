@@ -43,7 +43,7 @@ const ModalAdd = ({visible, onCancel, fetchAll}) =>{
   };
     return (
 <Modal
-      title="Brand add"
+      title="Thêm thương hiệu"
       open={visible}
       onCancel={onCancel}
       footer={null}

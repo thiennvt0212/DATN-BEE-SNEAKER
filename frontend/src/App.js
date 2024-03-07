@@ -16,6 +16,8 @@ import Size from "./page/admin/Size/Size";
 import Product from "./page/admin/Product/Product";
 import ShoesColar from "./page/admin/Shoes colar/ShoesColar";
 
+import ProductAdd from "./page/admin/Product/ModalAdd";
+
 function App() {
   return (
     <div className="App">
@@ -32,6 +34,7 @@ function App() {
               <Route path="/size" element={<Size />} />
               <Route path="/product" element={<Product />} />
               <Route path="/shoesColar" element={<ShoesColar />} />
+              <Route path="/product/add" element={<ProductAdd />} />
             </Routes>
           </div>
         </div>
