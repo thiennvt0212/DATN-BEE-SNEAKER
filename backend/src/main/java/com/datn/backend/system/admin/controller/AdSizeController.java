@@ -2,6 +2,8 @@ package com.datn.backend.system.admin.controller;
 
 import com.datn.backend.entity.Size;
 import com.datn.backend.system.admin.model.request.AdSizeRequest;
+import com.datn.backend.system.admin.model.request.FindMaterialRequest;
+import com.datn.backend.system.admin.model.request.FindSizeRequest;
 import com.datn.backend.system.admin.service.AdSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,11 @@ public class AdSizeController {
 
     @Autowired
     AdSizeService adSizeService;
+
+    @GetMapping
+    public ResponseEntity<?> getAllPage(FindSizeRequest request) {
+        return ResponseEntity.ok(adSizeService.getAllPage(request));
+    }
 
     @GetMapping("/getall")
     public ResponseEntity<?> getall(){

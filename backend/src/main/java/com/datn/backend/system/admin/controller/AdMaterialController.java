@@ -2,6 +2,8 @@ package com.datn.backend.system.admin.controller;
 
 import com.datn.backend.entity.Material;
 import com.datn.backend.system.admin.model.request.AdMaterialRequest;
+import com.datn.backend.system.admin.model.request.FindColorRequest;
+import com.datn.backend.system.admin.model.request.FindMaterialRequest;
 import com.datn.backend.system.admin.service.AdMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,11 @@ public class AdMaterialController {
 
     @Autowired
     AdMaterialService adMaterialService;
+
+    @GetMapping
+    public ResponseEntity<?> getAllPage(FindMaterialRequest request) {
+        return ResponseEntity.ok(adMaterialService.getAllPage(request));
+    }
 
     @GetMapping("/getall")
     public ResponseEntity<?> getall(){

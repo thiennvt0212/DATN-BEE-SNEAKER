@@ -2,6 +2,8 @@ package com.datn.backend.system.admin.controller;
 
 import com.datn.backend.entity.Sole;
 import com.datn.backend.system.admin.model.request.AdSoleRequest;
+import com.datn.backend.system.admin.model.request.FindSizeRequest;
+import com.datn.backend.system.admin.model.request.FindSoleRequest;
 import com.datn.backend.system.admin.service.AdSoleSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,12 @@ import java.util.List;
 public class AdSoleController {
     @Autowired
     private AdSoleSevice adSoleSevice;
+
+    @GetMapping
+    public ResponseEntity<?> getAllPage(FindSoleRequest request) {
+        return ResponseEntity.ok(adSoleSevice.getAllPage(request));
+    }
+
     @GetMapping("/getall")
     public ResponseEntity<?> getall(){
         List<Sole> list = adSoleSevice.getAll();

@@ -1,10 +1,15 @@
 package com.datn.backend.system.admin.service.impl;
 
+import com.datn.backend.common.PageableObject;
 import com.datn.backend.entity.Size;
 import com.datn.backend.system.admin.model.request.AdSizeRequest;
+import com.datn.backend.system.admin.model.request.FindSizeRequest;
+import com.datn.backend.system.admin.model.respone.SizeRespone;
 import com.datn.backend.system.admin.repository.AdSizeRepository;
 import com.datn.backend.system.admin.service.AdSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,5 +52,11 @@ public class AdSizeServiceImpl implements AdSizeService {
     public Size findById(String id) {
         Size size=adSizeRepository.findById(id).get();
         return size;
+    }
+
+    @Override
+    public PageableObject<SizeRespone> getAllPage(FindSizeRequest request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        return new PageableObject<>(adSizeRepository.getAllPage(pageable, request));
     }
 }

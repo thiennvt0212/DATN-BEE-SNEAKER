@@ -24,6 +24,4 @@ public interface AdBrandService {
 
     PageableObject<BrandRespone> getAllPage(FindBrandRequest request);
 
-
-
 }

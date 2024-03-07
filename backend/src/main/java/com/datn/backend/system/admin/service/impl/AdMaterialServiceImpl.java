@@ -1,10 +1,15 @@
 package com.datn.backend.system.admin.service.impl;
 
+import com.datn.backend.common.PageableObject;
 import com.datn.backend.entity.Material;
 import com.datn.backend.system.admin.model.request.AdMaterialRequest;
+import com.datn.backend.system.admin.model.request.FindMaterialRequest;
+import com.datn.backend.system.admin.model.respone.MaterialRespone;
 import com.datn.backend.system.admin.repository.AdMaterialRepository;
 import com.datn.backend.system.admin.service.AdMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,6 +55,12 @@ public class AdMaterialServiceImpl implements AdMaterialService {
     public Material findById(String id) {
         Material material = adMaterialRepository.findById(id).get();
         return material;
+    }
+
+    @Override
+    public PageableObject<MaterialRespone> getAllPage(FindMaterialRequest request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getSize());
+        return new PageableObject<>(adMaterialRepository.getAllPage(pageable, request));
     }
 
 }

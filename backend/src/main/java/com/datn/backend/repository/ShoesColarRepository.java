@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 @Repository(ShoesColarRepository.NAME)
-public interface ShoesColarRepository extends JpaRepository<ShoesColar, UUID> {
+public interface ShoesColarRepository extends JpaRepository<ShoesColar, String> {
     String NAME = "BaseShoesColarRepository";
 }

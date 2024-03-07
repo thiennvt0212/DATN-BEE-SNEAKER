@@ -2,6 +2,8 @@ package com.datn.backend.system.admin.controller;
 
 import com.datn.backend.entity.Color;
 import com.datn.backend.system.admin.model.request.AdColorRequest;
+import com.datn.backend.system.admin.model.request.FindBrandRequest;
+import com.datn.backend.system.admin.model.request.FindColorRequest;
 import com.datn.backend.system.admin.service.AdColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,11 @@ public class AdColorController {
 
     @Autowired
     AdColorService adColorService;
+
+    @GetMapping
+    public ResponseEntity<?> getAllPage(FindColorRequest request) {
+        return ResponseEntity.ok(adColorService.getAllPage(request));
+    }
 
     @GetMapping("/getall")
     public ResponseEntity<?> getall(){
